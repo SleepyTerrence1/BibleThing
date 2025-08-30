@@ -5,6 +5,31 @@
   <link rel="stylsheet" href="style.css>
 </head>
   <body>
-    
+      <h1>Verse Viewer</h1>
+  <div id="verse">Loading verse...</div>
+
+  <script>
+    // Step 1: Make a request to the API
+    fetch("https://api.scripture.api.bible/v1/bibles/de4e12af7f28f599-02/verses/JHN.3.16", {
+      headers: {
+        "api-key": "YOUR_API_KEY"
+      }
+    })
+
+    // Step 2: Wait for the response and convert it to JSON
+    .then(response => response.json())
+
+    // Step 3: Use the data to update the page
+    .then(data => {
+      document.getElementById("verse").innerHTML = data.data.content;
+    })
+
+    // Step 4: Handle errors if something goes wrong
+    .catch(error => {
+      document.getElementById("verse").innerText = "Oops! Couldn't load the verse.";
+      console.error(error);
+    });
+  </script>
+
     </body>
 </html>
